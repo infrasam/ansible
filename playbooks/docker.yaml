@@ -1,0 +1,31 @@
+---
+- name: Install Docker on Rocky Linux
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install required packages
+      ansible.builtin.dnf:
+        name:
+          - dnf-plugins-core
+        state: present
+
+    - name: Add Docker repository
+      ansible.builtin.command:
+        cmd: dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+        creates: /etc/yum.repos.d/docker-ce.repo
+
+    - name: Install Docker
+      ansible.builtin.dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+
+    - name: Enable and start Docker
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+

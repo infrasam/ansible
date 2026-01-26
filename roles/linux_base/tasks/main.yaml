@@ -1,0 +1,15 @@
+---
+- name: Ensure automation user exists
+  ansible.builtin.user:
+    name: ansible
+    shell: /bin/bash
+    groups: wheel
+    append: yes
+    state: present
+
+- name: Configure passwordless sudo for automation user
+  ansible.builtin.copy:
+    dest: /etc/sudoers.d/ansible
+    content: "ansible ALL=(ALL) NOPASSWD:ALL"
+    mode: '0440'
+

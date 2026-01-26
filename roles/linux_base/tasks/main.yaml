@@ -13,3 +13,8 @@
     content: "ansible ALL=(ALL) NOPASSWD:ALL"
     mode: '0440'
 
+- name: Add SSH authorized keys for ansible user
+  ansible.builtin.authorized_key:
+    user: ansible
+    key: "{{ item }}"
+  loop: "{{ ssh_authorized_keys }}"

@@ -1,0 +1,9 @@
+---
+- name: Configure Linux server
+  hosts: all
+  become: true
+  roles:
+    - common
+    - linux_base
+    - hardening
+

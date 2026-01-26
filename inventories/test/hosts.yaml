@@ -1,0 +1,7 @@
+all:
+  hosts:
+    ansible-server:
+      ansible_host: 192.168.1.22
+      ansible_user: ansible
+      ansible_ssh_private_key_file: /home/sam/.ssh/id_rsa
+

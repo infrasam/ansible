@@ -1,0 +1,14 @@
+---
+- name: Disable root SSH login
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin'
+    line: 'PermitRootLogin no'
+  notify: Restart ssh
+
+- name: Ensure firewall is enabled
+  ansible.builtin.service:
+    name: firewalld
+    state: started
+    enabled: true
+

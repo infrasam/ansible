@@ -1,0 +1,9 @@
+---
+# Manage local groups required for the Linux baseline
+
+- name: Ensure local admin groups exist
+  ansible.builtin.group:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ linux_base_groups }}"
+

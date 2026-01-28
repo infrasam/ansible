@@ -1,0 +1,12 @@
+---
+# Create Linux user accounts
+- name: Ensure Linux users exist
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    comment: "{{ item.comment | default('Managed by Ansible') }}"
+    groups: "{{ item.groups | default([]) }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    state: present
+    create_home: yes
+  loop: "{{ linux_users }}"
+

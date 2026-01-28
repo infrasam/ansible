@@ -1,20 +1,12 @@
 ---
-- name: Ensure automation user exists
-  ansible.builtin.user:
-    name: ansible
-    shell: /bin/bash
-    groups: wheel
-    append: yes
-    state: present
+# Linux base role entrypoint
 
-- name: Configure passwordless sudo for automation user
-  ansible.builtin.copy:
-    dest: /etc/sudoers.d/ansible
-    content: "ansible ALL=(ALL) NOPASSWD:ALL"
-    mode: '0440'
+- name: Manage local groups
+  ansible.builtin.import_tasks: groups.yaml
 
-- name: Add SSH authorized keys for ansible user
-  ansible.builtin.authorized_key:
-    user: ansible
-    key: "{{ item }}"
-  loop: "{{ ssh_authorized_keys }}"
+- name: Manage local users
+  ansible.builtin.import_tasks: users.yaml
+
+- name: Manage SSH access
+  ansible.builtin.import_tasks: ssh.yaml
+

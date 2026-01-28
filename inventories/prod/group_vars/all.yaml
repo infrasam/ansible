@@ -1,6 +1,7 @@
-timezone: Europe/Stockholm
-common_packages:
-  - vim
-  - git
-  - curl
+# Local groups required on all Linux servers
+
+linux_base_groups:
+  - wheel
+  - linux-admins
+  - security-admins
 

@@ -1,8 +1,24 @@
-timezone: Europe/Stockholm
-common_packages:
-  - vim
-  - git
-  - curl
+# Local groups required on all Linux servers
 
-ssh_authorized_keys:
-  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIApFmd7Lj2Vr7lPEU2HZmnXX0LpHsOnLAQlXLpRGkPV/ sam@Ubuntu"
+linux_base_groups:
+  - wheel
+  - linux-admins
+
+# Linux user definitions
+linux_users:
+  - name: sam
+    comment: "Linux administrator"
+    groups:
+      - linux_admins
+    shell: /bin/bash
+    ssh_keys:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIApFmd7Lj2Vr7lPEU2HZmnXX0LpHsOnLAQlXLpRGkPV/ sam@Ubuntu"
+
+  - name: ansible
+    comment: "Automation user"
+    groups:
+      - linux_admins
+    shell: /bin/bash
+    ssh_keys:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIApFmd7Lj2Vr7lPEU2HZmnXX0LpHsOnLAQlXLpRGkPV/ sam@Ubuntu"
+
